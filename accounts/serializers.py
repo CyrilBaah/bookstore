@@ -40,3 +40,29 @@ class RegisterationSerializer(serializers.ModelSerializer):
                 email=validated_data["email"],
                 password=validated_data["password"],
             )
+
+
+class LoginSerializer(serializers.Serializer):
+    """Login Serializer"""
+
+    email = serializers.CharField()
+    password = serializers.CharField(write_only=True, required=False)
+    google_id = serializers.CharField(required=False)
+
+    def validate(self, data):
+        # Check if a password was provided
+        if "password" in data:
+            user = authenticate(**data)
+            if user and user.is_active:
+                return user
+        else:
+            # If no password was provided, try to authenticate using Google ID
+            try:
+                user = CustomUser.objects.get(
+                    email=data["email"], google_id__isnull=False
+                )
+                if user and user.is_active:
+                    return user
+            except CustomUser.DoesNotExist:
+                pass
+        raise serializers.ValidationError("Incorrect Credentials")
