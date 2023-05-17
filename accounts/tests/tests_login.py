@@ -1,19 +1,16 @@
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.test import APITestCase
-from rest_framework_simplejwt.tokens import RefreshToken
-
-from ..serializers import LoginSerializer
 
 User = get_user_model()
 
 
 class LoginAPITest(APITestCase):
     def test_login_with_credentials(self):
-        url = "/accounts/login/"  # Replace with the actual URL
+        url = "/accounts/login/"
 
         # Create a user to use for login
-        user = User.objects.create_user(
+        User.objects.create_user(
             username="testuser", email="testuser@example.com", password="testpassword"
         )
 
@@ -36,10 +33,10 @@ class LoginAPITest(APITestCase):
         self.assertIn("access", tokens)
 
     def test_login_with_google_id_and_email(self):
-        url = "/accounts/login/"  # Replace with the actual URL
+        url = "/accounts/login/"
 
         # Create a user to use for login with Google ID and email
-        user = User.objects.create_user(
+        User.objects.create_user(
             username="testuser",
             email="testuser@example.com",
             password="testpassword",
@@ -64,7 +61,7 @@ class LoginAPITest(APITestCase):
         self.assertIn("access", tokens)
 
     def test_login_with_invalid_credentials(self):
-        url = "/accounts/login/"  # Replace with the actual URL
+        url = "/accounts/login/"
 
         # Prepare an invalid login payload
         payload = {
@@ -78,7 +75,7 @@ class LoginAPITest(APITestCase):
         self.assertNotIn("tokens", response.data)
 
     def test_login_with_invalid_google_credentials(self):
-        url = "/accounts/login/"  # Replace with the actual URL
+        url = "/accounts/login/"
 
         # Prepare an invalid Google login payload
         payload = {
