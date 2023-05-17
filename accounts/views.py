@@ -18,7 +18,9 @@ class RegistrationAPIView(GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         
         if serializer.is_valid(): 
-             if (
+            # Normal Registration
+            
+            if (
                 "username" in serializer.validated_data
                 and "email" in serializer.validated_data
                 and "password" in serializer.validated_data
@@ -37,3 +39,28 @@ class RegistrationAPIView(GenericAPIView):
                     "access": str(token.access_token),
                 }
                 return Response(response, status=status.HTTP_201_CREATED)
+            
+            # Google Registration
+            elif (
+                "username" in serializer.validated_data
+                and "email" in serializer.validated_data
+                and "google_id" in serializer.validated_data
+            ):
+                user = serializer.save()
+                token = RefreshToken.for_user(user)
+                data = serializer.data
+                response = {
+                    "status": "success",
+                    "code": status.HTTP_201_CREATED,
+                    "message": "Registration successful",
+                    "data": data,
+                }
+                data["tokens"] = {
+                    "refresh": str(token),
+                    "access": str(token.access_token),
+                }
+                return Response(response, status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
