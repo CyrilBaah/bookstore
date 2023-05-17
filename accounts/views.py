@@ -1,25 +1,27 @@
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
-from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import(RegisterationSerializer)
+from .serializers import RegisterationSerializer
 
 User = get_user_model()
 
+
 class RegistrationAPIView(GenericAPIView):
     """Registration API View."""
+
     permission_classes = (AllowAny,)
     serializer_class = RegisterationSerializer
-    
+
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        
-        if serializer.is_valid(): 
+
+        if serializer.is_valid():
             # Normal Registration
-            
+
             if (
                 "username" in serializer.validated_data
                 and "email" in serializer.validated_data
@@ -39,7 +41,7 @@ class RegistrationAPIView(GenericAPIView):
                     "access": str(token.access_token),
                 }
                 return Response(response, status=status.HTTP_201_CREATED)
-            
+
             # Google Registration
             elif (
                 "username" in serializer.validated_data

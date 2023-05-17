@@ -22,7 +22,6 @@ class RegisterationSerializer(serializers.ModelSerializer):
         fields = ("id", "username", "email", "password", "google_id")
         extra_kwargs = {"password": {"write_only": True, "required": False}}
 
-
     def create(self, validated_data):
         # Check if google_id is present in the validated data
         if "google_id" in validated_data:
