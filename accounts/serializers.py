@@ -66,3 +66,11 @@ class LoginSerializer(serializers.Serializer):
             except CustomUser.DoesNotExist:
                 pass
         raise serializers.ValidationError("Incorrect Credentials")
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    """Change password Serializer"""
+
+    model = CustomUser
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
