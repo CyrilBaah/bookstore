@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "django_rest_passwordreset",
+    "rest_framework_simplejwt.token_blacklist",
     "accounts",
 ]
 

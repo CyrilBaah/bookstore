@@ -9,6 +9,7 @@ from .serializers import (
     ChangePasswordSerializer,
     CustomUserSerializer,
     LoginSerializer,
+    LogoutSerializer,
     RegisterationSerializer,
 )
 
@@ -158,3 +159,25 @@ class ChangePasswordView(UpdateAPIView):
             return Response(response)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserLogoutAPIView(GenericAPIView):
+    """Logout users."""
+
+    serializer_class = LogoutSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            refresh_token = request.data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            response = {
+                "status": "success",
+                "code": status.HTTP_205_RESET_CONTENT,
+                "message": "Logout successfully",
+                "data": [],
+            }
+            return Response(response, status=status.HTTP_205_RESET_CONTENT)
+        except Exception:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
