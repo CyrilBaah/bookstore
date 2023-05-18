@@ -39,7 +39,7 @@ class PasswordResetTestCase(APITestCase):
         expected_status = status.HTTP_400_BAD_REQUEST
 
         self.assertEqual(response.status_code, expected_status)
-        
+
     def test_user_reset_password_request_with_blank_email(self):
         url = "/accounts/password_reset/"
 
@@ -52,7 +52,7 @@ class PasswordResetTestCase(APITestCase):
         expected_status = status.HTTP_400_BAD_REQUEST
 
         self.assertEqual(response.status_code, expected_status)
-        
+
     def test_user_reset_password_request_with_missing_email_field(self):
         url = "/accounts/password_reset/"
 
