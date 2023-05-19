@@ -10,3 +10,9 @@ Bookstore API
 - [Flake8](https://flake8.pycqa.org/en/latest/index.html# "Flake8")
 - [Black](https://black.readthedocs.io/en/stable/ "Black") 
 - [Isort](https://pycqa.github.io/isort/ "Isort")
+
+## Generate API documentation
+
+```sh
+$ ./manage.py spectacular --color --file schema.yml
+```
