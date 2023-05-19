@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_rest_passwordreset",
     "rest_framework_simplejwt.token_blacklist",
+    "drf_spectacular",
     "accounts",
 ]
 
@@ -53,6 +54,16 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    # API Documentation
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "BookStore API",
+    "DESCRIPTION": "Your project description",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    # OTHER SETTINGS
 }
 
 MIDDLEWARE = [
