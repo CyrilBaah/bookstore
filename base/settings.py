@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "drf_spectacular",
     "accounts",
+    "books",
+    "isbn_field",
 ]
 
 AUTH_USER_MODEL = "accounts.CustomUser"
