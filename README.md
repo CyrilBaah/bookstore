@@ -16,3 +16,9 @@ Bookstore API
 ```sh
 $ ./manage.py spectacular --color --file schema.yml
 ```
+
+## Generate Seeder
+- Users
+```sh
+ ./manage seed_users
+```
