@@ -20,3 +20,18 @@ class BookCreateAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class BookListAPIView(APIView):
+    """List all Book"""
+    
+    permission_classes = (IsAuthenticated, )
+    authentication_classes = (JWTAuthentication,)
+    
+    def get(self, request):
+        serializer = BookSerializer()
+        
+        books = Book.objects.all()
+        serializer = BookSerializer(books, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        
+    
