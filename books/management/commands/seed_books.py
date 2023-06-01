@@ -17,13 +17,8 @@ class Command(BaseCommand):
             book.author = fake.name()
             book.price = fake.pydecimal(left_digits=2, right_digits=1, positive=True)
             book.isbn = fake.isbn13()
-            
-            # You can modify the following lines based on your image handling logic
-            # Generate or assign a fake cover image for the book
-            cover_image = "https://unsplash.com/photos/RrhhzitYizg"
+            book.cover_image = "https://unsplash.com/photos/RrhhzitYizg"
 
-            # book.cover_image.save('book_covers/fake_cover.jpg', cover_image, save=True)
-            
             book.save()
 
         self.stdout.write(self.style.SUCCESS("Successfully seeded Book table"))
