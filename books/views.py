@@ -25,15 +25,21 @@ class BookCreateAPIView(APIView):
         serializer = BookSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            response = {
+                "status": "success",
+                "code": status.HTTP_201_CREATED,
+                "message": "Book Created successfully",
+                "data": serializer.data,
+            }
+            return Response(response, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class BookListAPIView(APIView):
     """List all Book"""
 
-    # permission_classes = (IsAuthenticated,)
-    # authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (JWTAuthentication,)
     pagination_class = BookPagination
 
     def get(self, request):

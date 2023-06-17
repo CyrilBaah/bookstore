@@ -18,8 +18,6 @@ class BookListAPITest(APITestCase):
         )
 
     def test_list_books(self):
-        url = "/books/"
-
         # Create some test books
         book1 = Book.objects.create(
             title="Book 1",
@@ -40,13 +38,16 @@ class BookListAPITest(APITestCase):
         self.client.force_authenticate(user=self.user)
 
         # Send a GET request to retrieve the list of books
+        url = "/books/"
         response = self.client.get(url)
 
+        # Assert the response status code
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        # Check if the returned data matches the serialized data
+        # Assert the response data
         expected_data = BookSerializer([book1, book2], many=True).data
-        self.assertEqual(response.data, expected_data)
+        actual_data = response.json().get("results", {}).get("data", None)
+        self.assertEqual(actual_data, expected_data)
 
     def test_list_books_unauthenticated(self):
         url = "/books/"
