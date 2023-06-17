@@ -38,11 +38,11 @@ class BookCreateAPITest(APITestCase):
         response = self.client.post(url, payload, format="multipart")
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data["title"], payload["title"])
-        self.assertEqual(response.data["author"], payload["author"])
-        self.assertEqual(response.data["price"], payload["price"])
-        self.assertEqual(response.data["isbn"], payload["isbn"])
-        self.assertIsNotNone(response.data["cover_image"])
+        self.assertEqual(response.data["data"]["title"], payload["title"])
+        self.assertEqual(response.data["data"]["author"], payload["author"])
+        self.assertEqual(response.data["data"]["price"], payload["price"])
+        self.assertEqual(response.data["data"]["isbn"], payload["isbn"])
+        self.assertIsNotNone(response.data["data"]["cover_image"])
 
     def test_create_book_invalid_data(self):
         url = "/books/create/"
