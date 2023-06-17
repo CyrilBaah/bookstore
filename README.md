@@ -11,6 +11,12 @@ Bookstore API
 - [Black](https://black.readthedocs.io/en/stable/ "Black") 
 - [Isort](https://pycqa.github.io/isort/ "Isort")
 
+## Run test cases
+- Users
+```sh
+ ./manage test
+```
+
 ## Generate API documentation
 
 ```sh
