@@ -83,3 +83,26 @@ class BookUpdateAPIView(APIView):
             }
             return Response(response, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class BookDeleteView(APIView):
+    """Delete an book"""
+
+    permission_classes = (IsAuthenticated, IsAdminUser)
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = BookSerializer
+
+    def delete(self, request, pk, *args, **kwargs):
+        book = Book.objects.filter(id=pk).first()
+        if not book:
+            return Response(
+                {"detail": "book not found"}, status=status.HTTP_404_NOT_FOUND
+            )
+        book.delete()
+        response = {
+            "status": "success",
+            "code": status.HTTP_204_NO_CONTENT,
+            "message": "book deleted successfully",
+        }
+        return Response(response, status.HTTP_204_NO_CONTENT)
