@@ -1,8 +1,7 @@
-import os
 from django.contrib.auth import get_user_model
-from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework import status
 from rest_framework.test import APITestCase
+
 from ..models import Book
 
 User = get_user_model()
@@ -24,7 +23,7 @@ class BookDeleteAPITest(APITestCase):
         self.book = Book.objects.create(
             title="Test Book",
             author="John Doe",
-            price='9.99',  
+            price="9.99",
             isbn="9783161484100",
             cover_image="https://unsplash.com/photos/RrhhzitYizg",
         )
