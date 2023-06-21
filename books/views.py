@@ -82,26 +82,6 @@ class BookListAPIView(APIView):
         }
         return paginator.get_paginated_response(response)
 
-    # def get(self, request):
-    #     search_query = request.query_params.get('query', '')
-
-    #     #Filter and Search books
-    #     books = Book.objects.filter(
-    #         Q(title__icontains=search_query) |
-    #         Q(author__icontains=search_query) |
-    #         Q(isbn__icontains=search_query)
-    #     )
-    #     paginator = self.pagination_class()
-    #     paginated_books = paginator.paginate_queryset(books, request)
-    #     serializer = BookSerializer(paginated_books, many=True)
-    #     response = {
-    #         "status": "success",
-    #         "code": status.HTTP_200_OK,
-    #         "message": "Books retrieved successfully",
-    #         "data": serializer.data,
-    #     }
-    #     return paginator.get_paginated_response(response)
-
 
 class BookUpdateAPIView(APIView):
     """Update a Book | Administrator"""
