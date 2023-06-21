@@ -8,5 +8,5 @@ class Book(models.Model):
     author = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     isbn = ISBNField()
-    genre = models.CharField(max_length=255, null=True, blank=True) 
+    genre = models.CharField(max_length=255, null=True, blank=True)
     cover_image = models.ImageField(upload_to="book_covers/", null=True, blank=True)

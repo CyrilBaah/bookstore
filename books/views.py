@@ -1,6 +1,6 @@
+from django.db.models import Q
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
-from django.db.models import Q
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -42,7 +42,7 @@ class BookListAPIView(APIView):
     permission_classes = (IsAuthenticated,)
     authentication_classes = (JWTAuthentication,)
     pagination_class = BookPagination
-    
+
     def get(self, request):
         # Get query parameters
         query = request.GET.get("query")
@@ -54,7 +54,11 @@ class BookListAPIView(APIView):
         # Build the query dynamically
         filters = Q()
         if query:
-            filters |= Q(title__icontains=query) | Q(author__icontains=query) | Q(isbn__icontains=query)
+            filters |= (
+                Q(title__icontains=query)
+                | Q(author__icontains=query)
+                | Q(isbn__icontains=query)
+            )
         if genre:
             filters &= Q(genre=genre)
         if author:
@@ -80,7 +84,7 @@ class BookListAPIView(APIView):
 
     # def get(self, request):
     #     search_query = request.query_params.get('query', '')
-        
+
     #     #Filter and Search books
     #     books = Book.objects.filter(
     #         Q(title__icontains=search_query) |

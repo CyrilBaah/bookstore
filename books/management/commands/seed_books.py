@@ -9,7 +9,15 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         fake = Faker()
-        genres = ["Fiction", "Romance", "Mystery", "Science Fiction", "Thriller", "Historical Fiction", "Literature"]
+        genres = [
+            "Fiction",
+            "Romance",
+            "Mystery",
+            "Science Fiction",
+            "Thriller",
+            "Historical Fiction",
+            "Literature",
+        ]
         # Create 100 books with fake data
         for _ in range(100):
             book = Book()
