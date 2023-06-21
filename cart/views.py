@@ -31,6 +31,28 @@ class CartCreateView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class CartListView(APIView):
+    """List all carts | Administrators"""
+
+    permission_classes = (IsAuthenticated, IsAdminUser)
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = CartSerializer
+
+    def get(self, request, *args, **kwargs):
+        exercises = Cart.objects.all()
+        total_carts = Cart.objects.count()
+        serializer = CartSerializer(exercises, many=True)
+        response = {
+            "status": "success",
+            "code": status.HTTP_200_OK,
+            "message": "All Cart Available",
+            "total_cart": total_carts,
+            "data": serializer.data,
+        }
+        return Response(response, status=status.HTTP_200_OK)
+
+
 class CartDetailView(APIView):
     """List My Cart"""
 
