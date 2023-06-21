@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
@@ -43,7 +44,33 @@ class BookListAPIView(APIView):
     pagination_class = BookPagination
 
     def get(self, request):
-        books = Book.objects.all()
+        # Get query parameters
+        query = request.GET.get("query")
+        genre = request.GET.get("genre")
+        author = request.GET.get("author")
+        min_price = request.GET.get("min_price")
+        max_price = request.GET.get("max_price")
+
+        # Build the query dynamically
+        filters = Q()
+        if query:
+            filters |= (
+                Q(title__icontains=query)
+                | Q(author__icontains=query)
+                | Q(isbn__icontains=query)
+            )
+        if genre:
+            filters &= Q(genre=genre)
+        if author:
+            filters &= Q(author=author)
+        if min_price:
+            filters &= Q(price__gte=min_price)
+        if max_price:
+            filters &= Q(price__lte=max_price)
+
+        # Filter books based on the query
+        books = Book.objects.filter(filters)
+
         paginator = self.pagination_class()
         paginated_books = paginator.paginate_queryset(books, request)
         serializer = BookSerializer(paginated_books, many=True)
@@ -54,6 +81,26 @@ class BookListAPIView(APIView):
             "data": serializer.data,
         }
         return paginator.get_paginated_response(response)
+
+    # def get(self, request):
+    #     search_query = request.query_params.get('query', '')
+
+    #     #Filter and Search books
+    #     books = Book.objects.filter(
+    #         Q(title__icontains=search_query) |
+    #         Q(author__icontains=search_query) |
+    #         Q(isbn__icontains=search_query)
+    #     )
+    #     paginator = self.pagination_class()
+    #     paginated_books = paginator.paginate_queryset(books, request)
+    #     serializer = BookSerializer(paginated_books, many=True)
+    #     response = {
+    #         "status": "success",
+    #         "code": status.HTTP_200_OK,
+    #         "message": "Books retrieved successfully",
+    #         "data": serializer.data,
+    #     }
+    #     return paginator.get_paginated_response(response)
 
 
 class BookUpdateAPIView(APIView):
@@ -83,3 +130,26 @@ class BookUpdateAPIView(APIView):
             }
             return Response(response, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class BookDeleteView(APIView):
+    """Delete an book"""
+
+    permission_classes = (IsAuthenticated, IsAdminUser)
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = BookSerializer
+
+    def delete(self, request, pk, *args, **kwargs):
+        book = Book.objects.filter(id=pk).first()
+        if not book:
+            return Response(
+                {"detail": "book not found"}, status=status.HTTP_404_NOT_FOUND
+            )
+        book.delete()
+        response = {
+            "status": "success",
+            "code": status.HTTP_204_NO_CONTENT,
+            "message": "book deleted successfully",
+        }
+        return Response(response, status.HTTP_204_NO_CONTENT)
