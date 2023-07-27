@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "accounts",
     "books",
     "cart",
+    "health",
     "isbn_field",
 ]
 

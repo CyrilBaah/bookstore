@@ -25,4 +25,6 @@ urlpatterns = [
     path("api/schema/docs", SpectacularSwaggerView.as_view(url_name="schema")),
     path("books/", include("books.urls"), name="books"),
     path("cart/", include("cart.urls"), name="cart"),
+    path("health/", include("health.urls"), name="health"),
+    
 ]
