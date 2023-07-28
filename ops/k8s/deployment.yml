@@ -24,7 +24,50 @@ spec:
             cpu: "750m"
         ports:
           - containerPort: 8000
-        
-
-          
+        env:
+          - name: SECRET_KEY
+            valueFrom:
+              configMapKeyRef:
+                name: bookstore-configmap
+                key: SECRET_KEY
+          - name: DEBUG
+            valueFrom:
+              configMapKeyRef:
+                name: bookstore-configmap
+                key: DEBUG
+          - name: USE_S3_BUCKET
+            valueFrom:
+              configMapKeyRef:
+                name: bookstore-configmap
+                key: USE_S3_BUCKET
+          - name: DB_TYPE
+            valueFrom:
+              secretKeyRef:
+                name: bookstore-secret
+                key: DB_TYPE
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: bookstore-secret
+                key: DB_USER
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: bookstore-secret
+                key: DB_PASSWORD
+          - name: DB_NAME
+            valueFrom:
+              secretKeyRef:
+                name: bookstore-secret
+                key: DB_NAME
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: bookstore-secret
+                key: DB_HOST
+          - name: DB_PORT
+            valueFrom:
+              secretKeyRef:
+                name: bookstore-secret
+                key: DB_PORT         
         
