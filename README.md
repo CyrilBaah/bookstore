@@ -28,3 +28,7 @@ $ ./manage.py spectacular --color --file schema.yml
 ```sh
  ./manage seed_users
 ```
+## Get docker image | PostgreSQL DB IP
+```sh
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
+```

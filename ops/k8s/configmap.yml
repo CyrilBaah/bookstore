@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bookstore-configmap
+data:
+  SECRET_KEY: "django-insecure-t*%6$$%k^(864)csxi*b3sux$l*&)b-f(o_xxxq+%6z%@5xzr4"
+  DEBUG: "True"
+  USE_S3_BUCKET: "False"

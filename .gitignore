@@ -161,3 +161,4 @@ cython_debug/
 
 file.txt
 book_covers
+secret.yml
