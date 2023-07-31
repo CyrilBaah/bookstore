@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+      - name: {{ .Values.app.name }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        resources:
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.memory }}
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+        ports:
+          - containerPort: {{ .Values.service.port }}
+        env:
+          - name: {{ .Values.bookstoreConfigmap }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.bookstoreConfigmap }}
+                key: {{ .Values.bookstoreConfigmap.SECRET_KEY }}
+          - name: {{ .Values.bookstoreConfigmap.DEBUG }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.bookstoreConfigmap }}
+                key: {{ .Values.bookstoreConfigmap.DEBUG }}
+          - name: {{ .Values.bookstoreConfigmap.USE_S3_BUCKET }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Values.bookstoreConfigmap }}
+                key: {{ .Values.bookstoreConfigmap.USE_S3_BUCKET }}
+          - name: {{ .Values.bookstoreSecret }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.bookstoreSecret }}
+                key: {{ .Values.bookstoreSecret.DB_TYPE }}
+          - name: {{ .Values.bookstoreSecret.DB_USER }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.bookstoreSecret }}
+                key: {{ .Values.bookstoreSecret.DB_USER }}
+          - name: {{ .Values.bookstoreSecret.DB_PASSWORD }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.bookstoreSecret }}
+                key: {{ .Values.bookstoreSecret.DB_PASSWORD }}
+          - name: {{ .Values.bookstoreSecret }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.bookstoreSecret }}
+                key: {{ .Values.bookstoreSecret.DB_NAME }}
+          - name: {{ .Values.bookstoreSecret.DB_HOST }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.bookstoreSecret }}
+                key: {{ .Values.bookstoreSecret.DB_HOST }}
+          - name: {{ .Values.bookstoreSecret.DB_PORT }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.bookstoreSecret }}
+                key: {{ .Values.bookstoreSecret.DB_PORT }}         
+        
