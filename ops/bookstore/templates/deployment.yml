@@ -24,50 +24,7 @@ spec:
             cpu: {{ .Values.resources.requests.cpu }}
         ports:
           - containerPort: {{ .Values.service.port }}
-        env:
-          - name: {{ .Values.bookstoreConfigmap }}
-            valueFrom:
-              configMapKeyRef:
-                name: {{ .Values.bookstoreConfigmap }}
-                key: {{ .Values.bookstoreConfigmap.SECRET_KEY }}
-          - name: {{ .Values.bookstoreConfigmap.DEBUG }}
-            valueFrom:
-              configMapKeyRef:
-                name: {{ .Values.bookstoreConfigmap }}
-                key: {{ .Values.bookstoreConfigmap.DEBUG }}
-          - name: {{ .Values.bookstoreConfigmap.USE_S3_BUCKET }}
-            valueFrom:
-              configMapKeyRef:
-                name: {{ .Values.bookstoreConfigmap }}
-                key: {{ .Values.bookstoreConfigmap.USE_S3_BUCKET }}
-          - name: {{ .Values.bookstoreSecret }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.bookstoreSecret }}
-                key: {{ .Values.bookstoreSecret.DB_TYPE }}
-          - name: {{ .Values.bookstoreSecret.DB_USER }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.bookstoreSecret }}
-                key: {{ .Values.bookstoreSecret.DB_USER }}
-          - name: {{ .Values.bookstoreSecret.DB_PASSWORD }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.bookstoreSecret }}
-                key: {{ .Values.bookstoreSecret.DB_PASSWORD }}
-          - name: {{ .Values.bookstoreSecret }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.bookstoreSecret }}
-                key: {{ .Values.bookstoreSecret.DB_NAME }}
-          - name: {{ .Values.bookstoreSecret.DB_HOST }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.bookstoreSecret }}
-                key: {{ .Values.bookstoreSecret.DB_HOST }}
-          - name: {{ .Values.bookstoreSecret.DB_PORT }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.bookstoreSecret }}
-                key: {{ .Values.bookstoreSecret.DB_PORT }}         
-        
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.app.name }}-configmap
+          
