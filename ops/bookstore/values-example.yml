@@ -1,0 +1,29 @@
+app:
+  name: bookstore
+replicaCount: 1
+image:
+  repository: cyrilbaah/bookstore
+  tag: latest
+service:
+  type: LoadBalancer
+  port: 8000
+ingress:
+  host: "example.com"
+resources: 
+  limits:
+    memory: "1.0Gi"
+    cpu: "1"
+  requests:
+    memory: "600Mi"
+    cpu: "750m"
+bookstoreConfigmap:
+  SECRET_KEY: ""
+  DEBUG: ""
+  USE_S3_BUCKET: ""
+bookstoreSecret:
+  DB_TYPE: ""
+  DB_USER: ""
+  DB_PASSWORD: ""
+  DB_NAME: ""
+  DB_HOST: ""
+  DB_PORT: ""
