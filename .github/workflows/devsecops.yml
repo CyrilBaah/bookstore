@@ -53,7 +53,7 @@ jobs:
         # Lint Flake8
         flake8 .
 
-    - name: Test SCA Vulnerabilities
+    - name: Test SCA Vulnerabilities | Static Composition Analysis
       run: |
         pip install pyraider
         pyraider go -e results.json
