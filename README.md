@@ -54,3 +54,6 @@ $ ./manage.py spectacular --color --file schema.yml
 ```sh
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
 ```
+
+## Features in the DevSecOps Pipeline
+- 

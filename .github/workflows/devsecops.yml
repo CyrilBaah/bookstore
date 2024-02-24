@@ -50,4 +50,12 @@ jobs:
         # Import sort
         isort --check-only .
 
+        # Lint Flake8
+        flake8 .
+
+    - name: Test SCA Vulnerabilities
+      run: |
+        pip install pyraider
+        pyraider go -e results.json
+
         
