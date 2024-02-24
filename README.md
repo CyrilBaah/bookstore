@@ -1,5 +1,5 @@
-# Bookstore API
-Bookstore API
+# Bookstore API | DevSecOps CI/CD pipeline
+The Bookstore API is a RESTful API built with a focus on DevSecOps practices to ensure security throughout the development lifecycle.
 
 ## Technology Stack
 - [Python](https://www.python.org/ "python")
@@ -15,6 +15,28 @@ Bookstore API
 - Users
 ```sh
  ./manage test
+```
+
+## How to set up locally using Docker container - **Recommended**
+### Prerequisite
+- Make sure **Docker** is installed locally. *Checkout installation here* [Docker](https://www.docker.com/ "Docker")
+- Make sure **Postgres** is installed locally. *Checkout installation here* [Postgres](https://www.postgresql.org/ "Postgres")
+
+1. Clone the project.
+```sh
+ git clone https://github.com/CyrilBaah/bookstore.git
+```
+```sh
+ cd bookstore
+```
+2. Change the env.example file to .env .
+3. Run 
+```sh
+ docker-compose build --no-cache
+```
+4. Run 
+```sh
+ docker-compose build up
 ```
 
 ## Generate API documentation
