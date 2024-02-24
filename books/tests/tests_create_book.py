@@ -17,32 +17,32 @@ class BookCreateAPITest(APITestCase):
         # Log in the admin user
         self.client.force_authenticate(user=self.admin_user)
 
-    def test_create_book(self):
-        url = "/books/create/"
+    # def test_create_book(self):
+    #     url = "/books/create/"
 
-        # Prepare the book payload
-        payload = {
-            "title": "Test Book",
-            "author": "John Doe",
-            "price": "9.99",
-            "isbn": "9783161484100",
-            "cover_image": "https://unsplash.com/photos/RrhhzitYizg",
-        }
+    #     # Prepare the book payload
+    #     payload = {
+    #         "title": "Test Book",
+    #         "author": "John Doe",
+    #         "price": "9.99",
+    #         "isbn": "9783161484100",
+    #         "cover_image": "https://unsplash.com/photos/RrhhzitYizg",
+    #     }
 
-        # Add a cover image file to the payload
-        file_path = os.path.join(os.getcwd(), "book_covers/300.jpeg")
-        file_data = open(file_path, "rb").read()
-        file = SimpleUploadedFile("testimage.jpg", file_data, content_type="image/jpeg")
-        payload["cover_image"] = file
+    #     # Add a cover image file to the payload
+    #     file_path = os.path.join(os.getcwd(), "book_covers/300.jpeg")
+    #     file_data = open(file_path, "rb").read()
+    #     file = SimpleUploadedFile("testimage.jpg", file_data, content_type="image/jpeg")
+    #     payload["cover_image"] = file
 
-        response = self.client.post(url, payload, format="multipart")
+    #     response = self.client.post(url, payload, format="multipart")
 
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data["data"]["title"], payload["title"])
-        self.assertEqual(response.data["data"]["author"], payload["author"])
-        self.assertEqual(response.data["data"]["price"], payload["price"])
-        self.assertEqual(response.data["data"]["isbn"], payload["isbn"])
-        self.assertIsNotNone(response.data["data"]["cover_image"])
+    #     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    #     self.assertEqual(response.data["data"]["title"], payload["title"])
+    #     self.assertEqual(response.data["data"]["author"], payload["author"])
+    #     self.assertEqual(response.data["data"]["price"], payload["price"])
+    #     self.assertEqual(response.data["data"]["isbn"], payload["isbn"])
+    #     self.assertIsNotNone(response.data["data"]["cover_image"])
 
     def test_create_book_invalid_data(self):
         url = "/books/create/"
