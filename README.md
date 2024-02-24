@@ -29,7 +29,7 @@ The Bookstore API is a RESTful API built with a focus on DevSecOps practices to 
 ```sh
  cd bookstore
 ```
-2. Change the env.example file to .env .
+2. Change the env.example file to .env 
 3. Run 
 ```sh
  docker-compose build --no-cache
