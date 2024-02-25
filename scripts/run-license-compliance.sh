@@ -23,6 +23,7 @@ approved_licenses = [
   'BSD License',
   'GNU Lesser General Public License v2 or later (LGPLv2+)',
   'GNU Lesser General Public License v3 (LGPLv3)',
+  'MIT',
   'Mozilla Public License 2.0 (MPL 2.0)',
   'Python Software Foundation License',
   'MIT License',

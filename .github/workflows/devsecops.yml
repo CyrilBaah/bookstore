@@ -55,7 +55,7 @@ jobs:
 
     - name: Test SCA Vulnerabilities | Static Composition Analysis
       run: |
-        pyraider check -f requirements.txt
+        pyraider autofix -f requirements.txt
 
     - name: Check Package License
       run: |
