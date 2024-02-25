@@ -57,4 +57,12 @@ jobs:
       run: |
         pyraider check -f requirements.txt
 
+    - name: Check Package License
+      run: |
+        pip-licenses --format=json > licenses.json
+        ./scripts/run-license-compliance.sh
+
+      
+      
+
         
