@@ -55,7 +55,6 @@ jobs:
 
     - name: Test SCA Vulnerabilities | Static Composition Analysis
       run: |
-        pip install pyraider
-        pyraider go -e results.json
+        pyraider check -f requirements.txt
 
         
