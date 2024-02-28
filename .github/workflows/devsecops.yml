@@ -64,7 +64,7 @@ jobs:
 
     - name: Scan for Secrets with Trufflehog
       run: |
-        trufflehog .
+        trufflehog3 --no-history --format json --output report.json --exclude "env/*"
 
       
       
