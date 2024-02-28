@@ -29,7 +29,7 @@ approved_licenses = [
   'MIT License',
   'Historical Permission Notice and Disclaimer (HPND)',
   'GNU Library or Lesser General Public License (LGPL)',
-  'GNU'
+  'GNU',
 ]
 
 for package in licenses:
