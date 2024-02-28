@@ -62,6 +62,10 @@ jobs:
         pip-licenses --format=json > licenses.json
         ./scripts/run-license-compliance.sh
 
+    - name: Scan for Secrets with Trufflehog
+      run: |
+        trufflehog .
+
       
       
 

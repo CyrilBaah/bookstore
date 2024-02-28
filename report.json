@@ -1,0 +1,21 @@
+[
+  {
+    "rule": {
+      "id": "high-entropy",
+      "message": "High Entropy",
+      "severity": "MEDIUM"
+    },
+    "path": ".env",
+    "line": "2",
+    "secret": "KEY=ZGphbmduevLWluc2VjdXJlLWlnIXN6OXMlJG80Z24mQHJwb0BxcCNybiQtIT09YmI5aGMjaXB0bF5pIylhajI0dHJx",
+    "context": {
+      "2": "SECRET_KEY=ZGphbmduevLWluc2VjdXJlLWlnIXN6OXMlJG80Z24mQHJwb0BxcCNybiQtIT09YmI5aGMjaXB0bF5pIylhajI0dHJx"
+    },
+    "id": "01a5def8-83e4-3374-8547-2a3da92e8db3",
+    "branch": null,
+    "message": null,
+    "author": null,
+    "commit": null,
+    "date": null
+  }
+]
