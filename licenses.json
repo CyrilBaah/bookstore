@@ -10,6 +10,21 @@
     "Version": "18.10.0"
   },
   {
+    "License": "BSD License",
+    "Name": "GitPython",
+    "Version": "3.1.41"
+  },
+  {
+    "License": "BSD License",
+    "Name": "Jinja2",
+    "Version": "3.1.3"
+  },
+  {
+    "License": "BSD License",
+    "Name": "MarkupSafe",
+    "Version": "2.1.5"
+  },
+  {
     "License": "Historical Permission Notice and Disclaimer (HPND)",
     "Name": "Pillow",
     "Version": "9.5.0"
@@ -22,7 +37,7 @@
   {
     "License": "MIT License",
     "Name": "PyYAML",
-    "Version": "6.0"
+    "Version": "6.0.1"
   },
   {
     "License": "BSD License",
@@ -32,7 +47,7 @@
   {
     "License": "MIT License",
     "Name": "attrs",
-    "Version": "23.1.0"
+    "Version": "20.3.0"
   },
   {
     "License": "Apache Software License",
@@ -93,6 +108,11 @@
     "License": "MIT License",
     "Name": "flake8",
     "Version": "7.0.0"
+  },
+  {
+    "License": "BSD License",
+    "Name": "gitdb",
+    "Version": "4.0.11"
   },
   {
     "License": "MIT License",
@@ -205,6 +225,11 @@
     "Version": "1.16.0"
   },
   {
+    "License": "BSD License",
+    "Name": "smmap",
+    "Version": "5.0.1"
+  },
+  {
     "License": "MIT License",
     "Name": "soupsieve",
     "Version": "2.4.1"
@@ -218,6 +243,11 @@
     "License": "MIT License",
     "Name": "tomli",
     "Version": "2.0.1"
+  },
+  {
+    "License": "GNU",
+    "Name": "trufflehog3",
+    "Version": "3.0.9"
   },
   {
     "License": "Python Software Foundation License",

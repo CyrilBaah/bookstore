@@ -28,7 +28,8 @@ approved_licenses = [
   'Python Software Foundation License',
   'MIT License',
   'Historical Permission Notice and Disclaimer (HPND)',
-  'GNU Library or Lesser General Public License (LGPL)'
+  'GNU Library or Lesser General Public License (LGPL)',
+  'GNU'
 ]
 
 for package in licenses:
