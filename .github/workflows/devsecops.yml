@@ -39,32 +39,32 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    # - name: Unit tests and Linters
-    #   run: |
-    #     # Unit Test
-    #     python manage.py test
+    - name: Unit tests and Linters
+      run: |
+        # Unit Test
+        python manage.py test
 
-    #     # Code Formatter
-    #     black --check .
+        # Code Formatter
+        black --check .
 
-    #     # Import sort
-    #     isort --check-only .
+        # Import sort
+        isort --check-only .
 
-    #     # Lint Flake8
-    #     flake8 .
+        # Lint Flake8
+        flake8 .
 
-    # - name: Test SCA Vulnerabilities | Static Composition Analysis
-    #   run: |
-    #     pyraider check -f requirements.txt
+    - name: Test SCA Vulnerabilities | Static Composition Analysis
+      run: |
+        pyraider check -f requirements.txt
 
-    # - name: Check Package License
-    #   run: |
-    #     pip-licenses --format=json > licenses.json
-    #     ./scripts/run-license-compliance.sh
+    - name: Check Package License
+      run: |
+        pip-licenses --format=json > licenses.json
+        ./scripts/run-license-compliance.sh
 
-    # - name: Scan for Secrets with Trufflehog
-    #   run: |
-    #     trufflehog3 --no-history --format json --output report.json --exclude "env/*"
+    - name: Scan for Secrets with Trufflehog
+      run: |
+        trufflehog3 --no-history --format json --output report.json --exclude "env/*"
 
     # - name: Container Image Linter for Security Dockerfile with Dockle
     #   run: |
