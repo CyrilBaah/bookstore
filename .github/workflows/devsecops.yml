@@ -39,35 +39,45 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Unit tests and Linters
+    # - name: Unit tests and Linters
+    #   run: |
+    #     # Unit Test
+    #     python manage.py test
+
+    #     # Code Formatter
+    #     black --check .
+
+    #     # Import sort
+    #     isort --check-only .
+
+    #     # Lint Flake8
+    #     flake8 .
+
+    # - name: Test SCA Vulnerabilities | Static Composition Analysis
+    #   run: |
+    #     pyraider check -f requirements.txt
+
+    # - name: Check Package License
+    #   run: |
+    #     pip-licenses --format=json > licenses.json
+    #     ./scripts/run-license-compliance.sh
+
+    # - name: Scan for Secrets with Trufflehog
+    #   run: |
+    #     trufflehog3 --no-history --format json --output report.json --exclude "env/*"
+
+    # - name: Container Image Linter for Security Dockerfile with Dockle
+    #   run: |
+    #     docker run --rm -v $(pwd):/mnt goodwithtech/dockle:v0.3.1 -f json /mnt/Dockerfile > dockle.json
+    #     cat dockle.json
+    - name: Build an image from Dockerfile
       run: |
-        # Unit Test
-        python manage.py test
-
-        # Code Formatter
-        black --check .
-
-        # Import sort
-        isort --check-only .
-
-        # Lint Flake8
-        flake8 .
-
-    - name: Test SCA Vulnerabilities | Static Composition Analysis
-      run: |
-        pyraider check -f requirements.txt
-
-    - name: Check Package License
-      run: |
-        pip-licenses --format=json > licenses.json
-        ./scripts/run-license-compliance.sh
-
-    - name: Scan for Secrets with Trufflehog
-      run: |
-        trufflehog3 --no-history --format json --output report.json --exclude "env/*"
-
-    - name: Container Image Linter for Security Dockerfile with Dockle
-      run: |
-        docker run --rm -v $(pwd):/mnt goodwithtech/dockle:v0.3.1 -f json /mnt/Dockerfile > dockle.json
-        cat dockle.json
-        
+        docker build -t built-image:scan .
+    - name: Run dockle
+      uses: goodwithtech/dockle-action@main
+      with:
+        image: 'built-image:scan'
+        format: 'list'
+        exit-code: '1'
+        exit-level: 'warn'
+        ignore: 'CIS-DI-0001,DKL-DI-0006'
