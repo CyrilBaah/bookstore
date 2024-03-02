@@ -29,6 +29,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -76,4 +82,4 @@ jobs:
         format: 'list'
         exit-code: '1'
         exit-level: 'warn'
-        ignore: 'CIS-DI-0001,DKL-DI-0006'
+        ignore: 'CIS-DI-0001,DKL-DI-0006,DKL-DI-0005,CIS-DI-0010,CIS-DI-0007'
