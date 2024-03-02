@@ -66,8 +66,8 @@ jobs:
       run: |
         trufflehog3 --no-history --format json --output report.json --exclude "env/*"
 
-    - name: Scan Dockerfile with Dockle
+    - name: Container Image Linter for Security Dockerfile with Dockle
       run: |
-        docker run --rm -v $(pwd):/mnt goodwithtech/dockle -f json /mnt/Dockerfile > dockle.json
+        docker run --rm -v $(pwd):/mnt goodwithtech/dockle:v0.3.1 -f json /mnt/Dockerfile > dockle.json
         cat dockle.json
         
