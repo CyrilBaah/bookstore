@@ -56,4 +56,11 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' con
 ```
 
 ## Features in the DevSecOps Pipeline
-- 
+### Static Code Analysis
+- **Linters**: The pipeline includes [Flake8](https://flake8.pycqa.org/en/latest/index.html# "Flake8"), [Black](https://black.readthedocs.io/en/stable/ "Black") , and [Isort](https://pycqa.github.io/isort/ "Isort") to ensure code consistency and quality.
+
+### Unit Testing
+- **Test Cases**: The pipeline runs unit tests using `./manage test` to ensure code functionality.
+
+### Security Scanning
+- **Dependency Check**: Scans installed packages for security vulnerabilities by using [Pyraider](https://pypi.org/project/pyraider/ "Pyraider").
